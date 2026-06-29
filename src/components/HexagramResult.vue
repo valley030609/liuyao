@@ -26,12 +26,10 @@
         <span class="th th--kin">六亲</span>
         <span class="th th--najia">世应·纳甲</span>
         <span class="th th--yao">爻</span>
-        <span class="th th--pos">位</span>
         <template v-if="hasChanging">
           <span class="th th--divider"></span>
           <span class="th th--changed-kin">变卦·六亲</span>
           <span class="th th--changed-najia">变卦·纳甲</span>
-          <span class="th th--changed-yao">变卦·爻</span>
         </template>
       </div>
 
@@ -40,7 +38,6 @@
         v-for="i in 6"
         :key="i"
         :line="resolvedLines[6 - i]"
-        :position-index="6 - i"
         :is-shi="6 - i === shiYing?.shi"
         :is-ying="6 - i === shiYing?.ying"
         :najia="najiaData ? najiaData[6 - i] : null"
@@ -48,7 +45,6 @@
         :beast="sixBeasts[6 - i]"
         :changed-najia="changedNajiaData ? changedNajiaData[6 - i] : null"
         :changed-kin="(hasChanging && changedSixKins) ? changedSixKins[6 - i] : ''"
-        :changed-line="hasChanging ? changedResolvedLines[6 - i] : null"
         :show-changed="hasChanging"
       />
     </div>
@@ -219,11 +215,9 @@ const changedResolvedLines = computed(() => {
   &--kin   { width: 36px; }
   &--najia { flex: 1; justify-content: flex-start; padding-left: 6px; }
   &--yao   { width: 44px; }
-  &--pos   { width: 36px; }
   &--divider { width: 8px; border-left: 1px solid rgba($color-border, 0.6); }
   &--changed-kin { width: 36px; }
   &--changed-najia { flex: 1; justify-content: flex-start; padding-left: 4px; }
-  &--changed-yao { width: 44px; }
 }
 
 // ====== 变卦 ======

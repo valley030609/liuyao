@@ -31,9 +31,6 @@
       <span v-else class="yao-symbol">{{ line?.symbol || '' }}</span>
     </span>
 
-    <!-- 爻位 -->
-    <span class="yao-cell yao-cell--pos">{{ positionName }}</span>
-
     <!-- 分隔线 -->
     <span v-if="showChanged" class="yao-cell yao-cell--divider"></span>
 
@@ -44,21 +41,14 @@
     <span v-if="showChanged" class="yao-cell yao-cell--changed-najia">
       {{ changedNajiaName }}
     </span>
-
-    <!-- 变卦爻象 -->
-    <span v-if="showChanged" class="yao-cell yao-cell--changed-symbol">
-      <span class="yao-symbol">{{ changedLine?.symbol || '' }}</span>
-    </span>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
-import { POSITION_NAMES } from '../composables/useLiuYao.js'
 
 const props = defineProps({
   line: { type: Object, default: null },
-  positionIndex: { type: Number, required: true },
   isShi: { type: Boolean, default: false },
   isYing: { type: Boolean, default: false },
   // 纳甲/六亲/六兽
@@ -67,11 +57,9 @@ const props = defineProps({
   beast: { type: String, default: '' },
   changedNajia: { type: Object, default: null },
   changedKin: { type: String, default: '' },
-  changedLine: { type: Object, default: null },
   showChanged: { type: Boolean, default: false },
 })
 
-const positionName = computed(() => POSITION_NAMES[props.positionIndex] || '')
 const najiaName = computed(() => props.najia?.fullName || '')
 const changedNajiaName = computed(() => props.changedNajia?.fullName || '')
 </script>
@@ -140,12 +128,6 @@ const changedNajiaName = computed(() => props.changedNajia?.fullName || '')
     font-size: $font-size-lg;
   }
 
-  &--pos {
-    width: 36px;
-    font-size: $font-size-xs;
-    color: $color-text-muted;
-  }
-
   &--changed-najia {
     flex: 1;
     justify-content: flex-start;
@@ -159,11 +141,6 @@ const changedNajiaName = computed(() => props.changedNajia?.fullName || '')
     width: 36px;
     font-size: $font-size-xs;
     color: $color-text-muted;
-  }
-
-  &--changed-symbol {
-    width: 44px;
-    font-size: $font-size-lg;
   }
 
   &--divider {
@@ -199,33 +176,5 @@ const changedNajiaName = computed(() => props.changedNajia?.fullName || '')
   display: inline-block;
   width: 18px;
   flex-shrink: 0;
-}
-
-.yao-symbol {
-  font-size: $font-size-lg;
-}
-
-.changing-arrow {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  font-size: $font-size-sm;
-
-  .ca-from, .ca-to {
-    font-size: $font-size-lg;
-  }
-
-  .ca-from {
-    color: $color-changing;
-  }
-
-  .ca-arrow {
-    color: $color-changing;
-    font-size: $font-size-xs;
-  }
-
-  .ca-to {
-    color: $color-text-muted;
-  }
 }
 </style>
